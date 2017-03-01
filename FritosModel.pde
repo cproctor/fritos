@@ -4,76 +4,47 @@
 */
 
 class FritosModel {
-  // Settings (stay constant while the program runs)
-  int salt_cost = 150;
-  int corn_cost = 8;
-  int oil_corn_cost = 10;
-  int worker_fritos_cost = 5;
-  int fritos_salt_cost = 1;
-  int fritos_corn_cost = 10;
-  int fritos_oil_cost = 2;
   
-  // Variables
-  int salt = 0;
-  int corn = 0;
-  int oil = 0; 
-  int fritos = 0; 
+  ResourceModel salt, corn, oil, fritos, salt_workers, corn_workers;
   
-  int salt_progress = 0;
-  int corn_progress = 0;
-  
-  int salt_workers = 1;
-  int corn_workers = 1;
-  
-  // Interface. This is how the view will interact with the model.
-  boolean can_hire_worker() {
-    return fritos >= worker_fritos_cost;
+  FritosModel() {
+    salt         = new ResourceModel(0, 1, 150, new ResourceModel[]{},                new int[]{},         true);
+    corn         = new ResourceModel(0, 1, 8,   new ResourceModel[]{},                new int[]{},         true);
+    oil          = new ResourceModel(0, 0, 0,   new ResourceModel[]{corn},            new int[]{10},       false);
+    fritos       = new ResourceModel(0, 0, 0,   new ResourceModel[]{salt, corn, oil}, new int[]{1, 10, 5}, false);
+    salt_workers = new ResourceModel(1, 0, 0,   new ResourceModel[]{fritos},          new int[]{5},        false);
+    corn_workers = new ResourceModel(1, 0, 0,   new ResourceModel[]{fritos},          new int[]{5},        false);
   }
   
-  boolean can_press_oil() {
-    return  corn >= oil_corn_cost;
-  }
-  
-  boolean can_make_fritos() {
-    return salt >= fritos_salt_cost && corn >= fritos_corn_cost && oil >= fritos_oil_cost;
-  }
+  int salt_quantity()       { return salt.quantity;          }
+  int corn_quantity()       { return corn.quantity;          }
+  int oil_quantity()        { return oil.quantity;           }
+  int fritos_quantity()     { return fritos.quantity;        }
+  boolean can_hire_worker() { return salt_workers.can_buy(); }
+  boolean can_press_oil()   { return oil.can_buy();          }
+  boolean can_make_fritos() { return fritos.can_buy();       }
+  void press_oil()          { oil.buy();                     }
+  void make_fritos()        { fritos.buy();                  }  
+
   
   void hire_salt_worker() {
-    salt_workers += 1;
-    fritos -= worker_fritos_cost;
+    salt_workers.buy();
+    salt.pace += 1;
   }
   
   void hire_corn_worker() {
-    corn_workers += 1;
-    fritos -= worker_fritos_cost;
+    corn_workers.buy();
+    corn.pace += 1;
   }
-  
-  void press_oil() {
-    oil += 1;
-    corn -= oil_corn_cost;
-  }
-
-  void make_fritos() {
-    fritos += 1;
-    salt -= fritos_salt_cost;
-    corn -= fritos_corn_cost;
-    oil -= fritos_oil_cost;
-  }  
   
   void tick() {
-    salt_progress += salt_workers;
-    while (salt_progress >= salt_cost) {
-      salt += 1;
-      salt_progress -= salt_cost;
-    }
+    salt.tick();
+    corn.tick(); 
+    oil.tick(); 
+    fritos.tick(); 
+    salt_workers.tick(); 
+    corn_workers.tick();
     
-    corn_progress += corn_workers;
-    while (corn_progress >= corn_cost) {
-      corn += 1;
-      corn_progress -= corn_cost;
-    }
+    oil.autobuy = corn.quantity > 200;
   }
 }
-
-
-// Run!

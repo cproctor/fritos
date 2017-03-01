@@ -19,10 +19,10 @@ class FritosView {
     background(90);
     fill(0);
 
-    salt_view.render(model.salt);
-    corn_view.render(model.corn);
-    oil_view.render(model.oil);
-    fritos_view.render(model.fritos);
+    salt_view.render(model.salt_quantity());
+    corn_view.render(model.corn_quantity());
+    oil_view.render(model.oil_quantity());
+    fritos_view.render(model.fritos_quantity());
     salt_worker_button.render(model.can_hire_worker());
     corn_worker_button.render(model.can_hire_worker());
     oil_button.render(model.can_press_oil());
