@@ -1,13 +1,19 @@
 class FritosView {
   
-  DataLabelView salt_view, corn_view, oil_view, fritos_view;
+  BarGraphView salt_view, corn_view, oil_view, fritos_view;
   ButtonView salt_worker_button, corn_worker_button, oil_button, fritos_button;
   
   FritosView() {
-    salt_view          = new DataLabelView("Salt:",   24, 40, 120, 40);
-    corn_view          = new DataLabelView("Corn:",   24, 40, 120, 70);
-    oil_view           = new DataLabelView("Oil:",    24, 40, 120, 100);
-    fritos_view        = new DataLabelView("Fritos:", 24, 40, 120, 130);
+    float font_size = 24;
+    float label_x = 40;
+    float data_x = 120;
+    float bar_width = 50;
+    float resource_max = 60;
+    
+    salt_view          = new BarGraphView("Salt:",   font_size, label_x, data_x, bar_width, 40,  resource_max);
+    corn_view          = new BarGraphView("Corn:",   font_size, label_x, data_x, bar_width, 70,  resource_max);
+    oil_view           = new BarGraphView("Oil:",    font_size, label_x, data_x, bar_width, 100, resource_max);
+    fritos_view        = new BarGraphView("Fritos:", font_size, label_x, data_x, bar_width, 130, resource_max);
     
     salt_worker_button = new ButtonView("Hire a worker for the salt mine", 24, 180, 40);
     corn_worker_button = new ButtonView("Hire a worker for the corn field", 24, 180, 70);
