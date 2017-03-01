@@ -9,12 +9,12 @@ FritosView view;
 void setup() {
   size(600, 400);
   model = new FritosModel();
-  view = new FritosView(model);
+  view = new FritosView();
 }
 
 void draw() {
   model.tick();
-  view.render();
+  view.render(model);
 }
 
 void mousePressed() {
