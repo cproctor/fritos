@@ -10,10 +10,10 @@ class FritosModel {
   ResourceModel salt, corn, oil, fritos, salt_workers, corn_workers;
   
   FritosModel() {
-    salt         = new ResourceModel(0, 1, 150, new ResourceModel[]{},                new int[]{},         true);
-    corn         = new ResourceModel(0, 1, 8,   new ResourceModel[]{},                new int[]{},         true);
+    salt         = new ResourceModel(0, 1, 100, new ResourceModel[]{},                new int[]{},         true);
+    corn         = new ResourceModel(0, 1, 6,   new ResourceModel[]{},                new int[]{},         true);
     oil          = new ResourceModel(0, 0, 0,   new ResourceModel[]{corn},            new int[]{10},       false);
-    fritos       = new ResourceModel(0, 0, 0,   new ResourceModel[]{salt, corn, oil}, new int[]{1, 10, 2}, true);
+    fritos       = new ResourceModel(0, 0, 0,   new ResourceModel[]{salt, corn, oil}, new int[]{1, 10, 2}, false);
     salt_workers = new ResourceModel(1, 0, 0,   new ResourceModel[]{fritos},          new int[]{5},        false);
     corn_workers = new ResourceModel(1, 0, 0,   new ResourceModel[]{fritos},          new int[]{5},        false);
   }
@@ -31,6 +31,10 @@ class FritosModel {
   boolean can_make_fritos() { return fritos.can_buy();       }
   void press_oil()          { oil.buy();                     }
   void make_fritos()        { fritos.buy();                  }  
+  
+  FloatList[] history() {
+    return new FloatList[]{ salt.history, corn.history, oil.history, fritos.history }; 
+  }
 
   void hire_salt_worker() {
     salt_workers.buy();
@@ -51,6 +55,6 @@ class FritosModel {
     corn_workers.tick();
     
     // Let's save your keyboard some wear and tear.
-    oil.autobuy = corn.quantity > 100;
+    // oil.autobuy = corn.quantity > 100;
   }
 }

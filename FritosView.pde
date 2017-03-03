@@ -2,6 +2,7 @@ class FritosView {
   
   BarGraphView salt_view, corn_view, oil_view, fritos_view;
   ButtonView salt_worker_button, corn_worker_button, oil_button, fritos_button;
+  GraphView graph;
   
   FritosView() {
     float font_size = 24;
@@ -19,9 +20,12 @@ class FritosView {
     corn_worker_button = new ButtonView("Hire a worker for the corn field", 24, 180, 70);
     oil_button         = new ButtonView("Press corn oil", 24, 180, 100);
     fritos_button      = new ButtonView("Make Fritos!", 24, 180, 130);
+    
+    graph = new GraphView(40, 160, 500, 200);
   }
   
   void render(FritosModel model) {
+    colorMode(RGB, 255);
     background(90);
     fill(0);
 
@@ -33,6 +37,7 @@ class FritosView {
     corn_worker_button.render(model.can_hire_worker());
     oil_button.render(model.can_press_oil());
     fritos_button.render(model.can_make_fritos());
+    graph.render(model.history());
   }
   
   void handle_click() {

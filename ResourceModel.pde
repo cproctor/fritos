@@ -11,6 +11,7 @@ class ResourceModel {
   ResourceModel[] ingredients;
   int[] ingredient_costs;
   boolean autobuy;
+  FloatList history;
   
   ResourceModel(int q, int p, int pc, ResourceModel[] ings, int[] ing_costs, boolean ab) {
     quantity = q;
@@ -19,13 +20,15 @@ class ResourceModel {
     ingredients = ings;
     ingredient_costs = ing_costs;
     autobuy = ab;
+    history = new FloatList();
   }
   
   void tick() {
-    progress += pace;
+    progress += int(pow(1.4, pace));
     if (autobuy && can_buy()) {
       buy();
     }
+    history.append(float(quantity));
   }
   
   boolean can_buy() {

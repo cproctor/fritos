@@ -16,6 +16,8 @@ class BarGraphView {
   
   void render(int value) {
     // label
+    colorMode(RGB, 255);
+    stroke(0);
     textSize(font_size);
     textAlign(LEFT, TOP);
     text(label, label_x, y);
