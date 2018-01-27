@@ -25,7 +25,7 @@ class ResourceModel {
   
   void tick() {
     progress += int(pow(1.4, pace));
-    if (autobuy && can_buy()) {
+    while (autobuy && can_buy()) {
       buy();
     }
     history.append(float(quantity));

@@ -2,6 +2,9 @@
 // the data is a boolean value reporting whether it should be shown as enabled. 
 // The button can also report on whether the mouse is over it. 
 
+int ENABLED_COLOR = 0;
+int DISABLED_COLOR = 70;
+
 class ButtonView {
   
   String label;
@@ -19,9 +22,9 @@ class ButtonView {
     textSize(font_size);
     textAlign(LEFT, TOP);
     if (is_enabled) {
-      fill(0);
+      fill(ENABLED_COLOR);
     } else {
-      fill(70);
+      fill(DISABLED_COLOR);
     }
     text(label, x, y);
   }

@@ -10,6 +10,7 @@ class FritosView {
     float data_x = 120;
     float bar_width = 50;
     float resource_max = 60;
+    String[] labels = {"salt", "corn", "oil", "fritos"};
     
     salt_view          = new BarGraphView("Salt:",   font_size, label_x, data_x, bar_width, 40,  resource_max);
     corn_view          = new BarGraphView("Corn:",   font_size, label_x, data_x, bar_width, 70,  resource_max);
@@ -21,7 +22,7 @@ class FritosView {
     oil_button         = new ButtonView("Press corn oil", 24, 180, 100);
     fritos_button      = new ButtonView("Make Fritos!", 24, 180, 130);
     
-    graph = new GraphView(40, 160, 500, 200);
+    graph = new GraphView(40, 160, 500, 200, 16, labels);
   }
   
   void render(FritosModel model) {

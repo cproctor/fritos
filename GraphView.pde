@@ -3,16 +3,19 @@
 // each containing one series of data to graph. 
 
 class GraphView {
-  float x, y, ht, wid;
+  float x, y, graph_width, graph_height, font_size;
   float min_x = 10.0;
   float min_y = 10.0;
   float marker_radius = 4.0;
+  String[] labels;
  
-  GraphView(float _x, float _y, float _wid, float _ht) {
+  GraphView(float _x, float _y, float _graph_width, float _graph_height, float _font_size, String[] _labels) {
     x = _x;
     y = _y; 
-    wid = _wid;
-    ht = _ht;
+    graph_width = _graph_width;
+    graph_height = _graph_height;
+    font_size = _font_size;
+    labels = _labels;
   }
  
   void render(FloatList[] data) {
@@ -22,11 +25,13 @@ class GraphView {
     
     for (int series=0; series < data.length; series++) {
       set_color(series, data.length);
+      textSize(font_size);
+      text(labels[series], x, y + font_size * series);
       for (int i=1; i < data[series].size(); i++) {
-        float x_old = map(i-1, 0, mx, x, x + wid);
-        float y_old = map(data[series].get(i-1), 0, my, y + ht, y);
-        float x_new = map(i, 0, mx, x, x + wid);
-        float y_new = map(data[series].get(i), 0, my, y + ht, y);
+        float x_old = map(i-1, 0, mx, x, x + graph_width);
+        float y_old = map(data[series].get(i-1), 0, my, y + graph_height, y);
+        float x_new = map(i, 0, mx, x, x + graph_width);
+        float y_new = map(data[series].get(i), 0, my, y + graph_height, y);
         
         line(x_old, y_old, x_new, y_new);
       }
@@ -57,6 +62,7 @@ class GraphView {
   
   void set_color(int series, int seriesCount) {
     colorMode(HSB, 1.0);
+    fill(float(series) / seriesCount, 0.8, 0.5);
     stroke(float(series) / seriesCount, 0.8, 0.5);
   }
 }
