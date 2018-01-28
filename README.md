@@ -4,6 +4,9 @@ Inspired by [A Dark Room](http://adarkroom.doublespeakgames.com/), this is a tin
 make Fritos. Fritos are a delicious snack consisting of just three ingredients: corn, oil, and salt! This is 
 also a toy project to demonstrate some best practices in developing larger Processing projects. 
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.6.6/processing.js"></script>
+<canvas data-processing-sources="https://github.com/cproctor/fritos/blob/master/fritos.pde"></canvas>
+
 ## Big ideas
 
 - Model/View: It's wise to separate your code into models (which keep track of and manipulate state), and views 
