@@ -2,10 +2,7 @@
 
 Inspired by [A Dark Room](http://adarkroom.doublespeakgames.com/), this is a tiny Processing game where you 
 make Fritos. Fritos are a delicious snack consisting of just three ingredients: corn, oil, and salt! This is 
-also a toy project to demonstrate some best practices in developing larger Processing projects. 
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.6.6/processing.js"></script>
-<canvas data-processing-sources="https://github.com/cproctor/fritos/blob/master/fritos.pde"></canvas>
+also a toy project to demonstrate some best practices in developing larger Processing projects. [Play the demo](http://cproctor.github.io/fritos).
 
 ## Big ideas
 
